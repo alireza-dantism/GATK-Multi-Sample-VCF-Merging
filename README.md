@@ -28,7 +28,9 @@ The input VCFs were identified to use `chr` prefixes. The reference FASTA was mo
 This step is crucial because bioinformatics tools are extremely "literal." If your reference genome calls a chromosome `chr1` but your VCF calls it `1`, GATK will assume they are completely different organisms and crash.
 `zgrep` allows you to look inside a compressed (.gz) VCF file without unzipping it first.
 
-```zgrep "^##contig" [VCF_FILE]```
+```bash
+zgrep "^##contig" [VCF_FILE]
+```
 
 Return:
 ```contig=<ID=chr1,length=248956422,assembly=GRCh38>```
