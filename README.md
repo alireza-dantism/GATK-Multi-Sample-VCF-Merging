@@ -7,6 +7,7 @@ This document describes the process used to merge X individual gVCF samples into
 To ensure compatibility with GATK4 and Samtools, the following environments were created:
 
 ```bash
+# GATK
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
@@ -15,8 +16,8 @@ conda create -n gatk_env gatk4 -y
 conda activate gatk_env
 ```
 
-### Samtools Environment (for indexing)
 ```bash
+# Samtools Environment (for indexing)
 conda create -n fasta_index_env -c conda-forge -c bioconda samtools=1.19 -y
 ```
 
