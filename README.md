@@ -118,6 +118,7 @@ gatk --java-options "-Xmx12g" GenomicsDBImport \
 ```
 
 **4.2 Joint Genotyping**
+
 After the individual samples are consolidated into the GenomicsDB workspace, the joint genotyping step is performed. This step transitions the data from a storage format into an analysis-ready Multi-Sample VCF.
 
 ```bash
