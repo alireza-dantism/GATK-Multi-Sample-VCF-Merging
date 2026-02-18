@@ -14,6 +14,7 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 conda create -n gatk_env gatk4 -y
 conda activate gatk_env
+```
 
 # Samtools Environment (for indexing)
 conda create -n fasta_index_env -c conda-forge -c bioconda samtools=1.19 -y
@@ -31,10 +32,12 @@ awk '/^>/ { if ($1 ~ /^>[0-9XYM]+$/) { sub(/^>/, ">chr") } } {print}' GRCh38.fa 
 ```
 
 # Create Dictionary & Index:
-```gatk CreateSequenceDictionary -R GRCh38.chr.fa
+```bash
+gatk CreateSequenceDictionary -R GRCh38.chr.fa
 conda activate fasta_index_env
 samtools faidx GRCh38.chr.fa
-conda activate gatk_env```
+conda activate gatk_env
+```
 
 # Sample Mapping
 A `sample_map.txt` was generated containing multiply entries in the format:
