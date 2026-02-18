@@ -37,6 +37,9 @@ Return:
 
 By running the command, you are checking the ID field to see if the files use the "chr" prefix or not.
 
+[!WARNING]
+Check before proceeding: If your VCF headers and your reference FASTA already use the same naming convention (e.g., both use chr1 or both use 1), skip the renaming and re-indexing steps below. Mismatching these will cause GATK to fail.
+
 ### Rename Headers
 ```
 awk '/^>/ { if ($1 ~ /^>[0-9XYM]+$/) { sub(/^>/, ">chr") } } {print}' GRCh38.fa > GRCh38.chr.fa
@@ -50,11 +53,11 @@ samtools faidx GRCh38.chr.fa
 conda activate gatk_env
 ```
 
-### Sample Mapping
+## 3. Sample Mapping
 A `sample_map.txt` was generated containing multiply entries in the format:
 [Sample_ID] [Tab] [Path_to_gVCF]
 
-## 2. GenomicsDB Consolidation
+## 4. GenomicsDB Consolidation
 
 ### Prerequisites
 * **Samples:** multiple gVCF files (`.g.vcf.gz` + `.tbi` indexes).
