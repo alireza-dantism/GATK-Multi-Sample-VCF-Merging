@@ -33,7 +33,11 @@ zgrep "^##contig" [VCF_FILE]
 ```
 
 Return:
+
 ```contig=<ID=chr1,length=248956422,assembly=GRCh38>```
+OR
+```contig=<ID=1,length=248956422,assembly=GRCh38>```
+
 
 By running the command, you are checking the ID field to see if the files use the "chr" prefix or not.
 
