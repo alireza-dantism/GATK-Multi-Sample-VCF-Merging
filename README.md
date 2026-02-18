@@ -97,7 +97,6 @@ A `sample_map.txt` was generated containing multiply entries in the format:
 * **Reference:** GRCh38 (chromosome naming must be harmonized, since some BED files do not include the `chr` prefix).
 * **Intervals:** `targets.bed`.
 
-### GenomicsDB Consolidation
 Instead of merging the whole genome (which caused memory crashes and infinite wait times), we used a **Targeted Import** strategy. 
 
 ### Execution Command:
