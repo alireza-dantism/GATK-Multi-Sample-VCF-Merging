@@ -7,7 +7,6 @@ This document describes the process used to merge X individual gVCF samples into
 To ensure compatibility with GATK4 and Samtools, the following environments were created:
 
 ```bash
-# GATK4 Environment
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
