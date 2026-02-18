@@ -25,7 +25,15 @@ conda create -n fasta_index_env -c conda-forge -c bioconda samtools=1.19 -y
 The input VCFs were identified to use `chr` prefixes. The reference FASTA was modified to match this convention:
 
 ### Identify Contig Naming
-```Verified via zgrep "^##contig" [VCF_FILE]```
+This step is crucial because bioinformatics tools are extremely "literal." If your reference genome calls a chromosome `chr1` but your VCF calls it `1`, GATK will assume they are completely different organisms and crash.
+`zgrep` allows you to look inside a compressed (.gz) VCF file without unzipping it first.
+
+```zgrep "^##contig" [VCF_FILE]```
+
+Return:
+```contig=<ID=chr1,length=248956422,assembly=GRCh38>```
+
+By running the command, you are checking the ID field to see if the files use the "chr" prefix or not.
 
 ### Rename Headers
 ```
