@@ -1,5 +1,5 @@
 # GATK-Multi-Sample-VCF-Merging
-This document describes the process used to merge X individual gVCF samples into a single multi-sample VCF.
+This document describes the process used to merge multiple individual gVCF samples into a single multi-sample VCF.
 
 ## 1. Environment Setup & Preprocessing
 
