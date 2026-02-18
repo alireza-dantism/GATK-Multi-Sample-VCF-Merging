@@ -40,9 +40,7 @@ conda activate gatk_env
 
 # Sample Mapping
 A `sample_map.txt` was generated containing multiply entries in the format:
-```
 [Sample_ID] [Tab] [Path_to_gVCF]
-```
 
 ### 2. GenomicsDB Consolidation
 
