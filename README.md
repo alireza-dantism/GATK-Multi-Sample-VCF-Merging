@@ -100,6 +100,11 @@ A `sample_map.txt` was generated containing multiply entries in the format:
 Instead of merging the whole genome (which caused memory crashes and infinite wait times), we used a **Targeted Import** strategy. 
 
 ### Execution Command:
+
+**4.1 GenomicsDBImport**
+
+The `GenomicsDBImport` tool is designed to scale joint genotyping by organizing individual gVCFs into a specialized 2D columnar data structure (TileDB). The parameters used in this workflow were specifically chosen to optimize performance for a X-sample cohort on shared infrastructure.
+
 ```bash
 gatk --java-options "-Xmx12g" GenomicsDBImport \
   --genomicsdb-workspace-path pgx_cohort_db \
@@ -111,3 +116,18 @@ gatk --java-options "-Xmx12g" GenomicsDBImport \
   --genomicsdb-shared-posixfs-optimizations true \
   --overwrite-existing-genomicsdb-workspace true
 ```
+
+**4.2 Joint Genotyping**
+After the individual samples are consolidated into the GenomicsDB workspace, the joint genotyping step is performed. This step transitions the data from a storage format into an analysis-ready Multi-Sample VCF.
+
+```bash
+gatk --java-options "-Xmx12g" GenotypeGVCFs \
+  -R GRCh38.chr.fa \
+  -V gendb://pgx_cohort_db \
+  -O OUTPUT_cohort_joint_calls.vcf.gz \
+  --intervals targets.bed \
+  --only-output-calls-starting-in-intervals true
+```
+
+The `GenotypeGVCFs` tool performs the final likelihood calculations to determine the most probable genotype for every sample at every variant site identified in the cohort.
+
