@@ -37,7 +37,7 @@ Return:
 
 By running the command, you are checking the ID field to see if the files use the "chr" prefix or not.
 
-> [!WARNING]  
+> [!IMPORTANT]  
 > **Check before proceeding:** If your VCF headers and your reference FASTA already use the same naming convention (e.g., both use chr1 or both use 1), skip the renaming and re-indexing steps below and move directly to **Step 3.** Mismatching these will cause GATK to fail.
 
 ### Rename Headers
