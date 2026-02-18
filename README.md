@@ -53,7 +53,40 @@ samtools faidx GRCh38.chr.fa
 conda activate gatk_env
 ```
 
-## 3. Sample Mapping
+## 3. Sample Map Generation Logic
+To facilitate the batch import of multiple samples into GenomicsDB, a bash script was utilized to automate the creation of the `sample_map.txt`. The script iterates through the source directory, utilizing the `basename` command to extract **unique Sample IDs** from the filenames while stripping the `.g.vcf.gz` extensions. To ensure the manifest remains portable and robust against directory changes, the `realpath` command was used to resolve absolute paths for every gVCF file. Crucially, the script enforces the GATK-required **Tab-separated** format between the Sample ID and the File Path.
+
+```bash
+#!/bin/bash
+
+GVCF_DIR="/DIRECTORY"
+OUTPUT_FILE="sample_map.txt"
+
+echo "Creating sample map file..."
+echo "Reading from: $GVCF_DIR"
+echo "Writing to: $(pwd)/$OUTPUT_FILE"
+
+> "$OUTPUT_FILE"
+
+for f in "$GVCF_DIR"/*.g.vcf.gz; do
+    if [[ -f "$f" ]]; then
+        
+        # Extract sample name from filename
+        sample=$(basename "$f" .g.vcf.gz)
+        
+        fullpath=$(realpath "$f")
+        
+        echo -e "${sample}\t${fullpath}" >> "$OUTPUT_FILE"
+        
+        echo "Added: $sample"
+    fi
+done
+
+echo "Done."
+echo "Sample map saved to:"
+echo "$(pwd)/$OUTPUT_FILE"
+```
+
 A `sample_map.txt` was generated containing multiply entries in the format:
 [Sample_ID] [Tab] [Path_to_gVCF]
 
