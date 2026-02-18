@@ -16,8 +16,9 @@ conda activate gatk_env
 ```
 
 ### Samtools Environment (for indexing)
+```bash
 conda create -n fasta_index_env -c conda-forge -c bioconda samtools=1.19 -y
-
+```
 
 ### Reference Genome Standardization
 The input VCFs were identified to use `chr` prefixes. The reference FASTA was modified to match this convention:
