@@ -155,16 +155,16 @@ Normalization is a critical step to ensure that the VCF is compatible with some 
 
 ```bash
 # Normalize: Left-align indels and split multiallelic sites
-bcftools norm -m -any -f ../step-3/GRCh38.chr.fa MU_cohort_joint_calls.vcf.gz -Oz -o MU_cohort_norm.vcf.gz
+bcftools norm -m -any -f GRCh38.chr.fa FILE.vcf.gz -Oz -o FILE_norm.vcf.gz
 
 # Index the result (required for most downstream tools)
-bcftools index -t MU_cohort_norm.vcf.gz
+bcftools index -t FILE_norm.vcf.gz
 ```
 **5.3 Normalized VCF Verification**
 
 With your file now ready, run this one-liner to confirm the sample IDs match your expectations:
 
 ```bash
-bcftools query -l MU_cohort_norm.vcf.gz | head -n 5
+bcftools query -l FILE_norm.vcf.gz | head -n 5
 ```
 
