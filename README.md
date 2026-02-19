@@ -22,7 +22,6 @@ conda create -n fasta_index_env -c conda-forge -c bioconda samtools=1.19 -y
 ```
 
 ## 2. Reference Genome Standardization
-The input VCFs were identified to use `chr` prefixes. The reference FASTA was modified to match this convention:
 
 ### Identify Contig Naming
 This step is crucial because bioinformatics tools are extremely "literal." If your reference genome calls a chromosome `chr1` but your VCF calls it `1`, GATK will assume they are completely different organisms and crash.
