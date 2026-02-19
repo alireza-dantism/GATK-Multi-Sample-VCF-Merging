@@ -157,16 +157,16 @@ By splitting multiallelic sites and left-aligning `Indels` against the reference
 
 ```bash
 # Normalize: Left-align indels and split multiallelic sites
-bcftools norm -m -any -f GRCh38.chr.fa FILE.vcf.gz -Oz -o FILE_norm.vcf.gz
+bcftools norm -m -any -f GRCh38.chr.fa OUTPUT_cohort_joint_calls.vcf.gz -Oz -o OUTPUT_cohort_joint_calls_norm.vcf.gz
 
 # Index the result (required for most downstream tools)
-bcftools index -t FILE_norm.vcf.gz
+bcftools index -t OUTPUT_cohort_joint_calls_norm.vcf.gz
 ```
 **5.3 Normalized VCF Verification**
 
 With your file now ready, run this one-liner to confirm the sample IDs match your expectations:
 
 ```bash
-bcftools query -l FILE_norm.vcf.gz | head -n 5
+bcftools query -l OUTPUT_cohort_joint_calls_norm.vcf.gz | head -n 5
 ```
 
