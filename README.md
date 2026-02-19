@@ -138,3 +138,33 @@ gatk --java-options "-Xmx12g" GenotypeGVCFs \
 
 The `GenotypeGVCFs` tool performs the final likelihood calculations to determine the most probable genotype for every sample at every variant site identified in the cohort.
 
+## 5. Normalization
+
+**5.1 Create and Activate the Environment**
+```bash
+# Create the environment named 'bcftools_env'
+conda create -n bcftools_env -c bioconda -c conda-forge bcftools htslib -y
+
+# Activate it
+conda activate bcftools_env
+```
+
+**5.2 Run the Normalization**
+
+Normalization is a critical step to ensure that the VCF is compatible with some other tools. These tools require parsimonious, biallelic records to accurately call star alleles and haplotypes. Because standard joint-genotyping outputs often include multiple alternate alleles on a single line (multiallelic sites) and inconsistent Indel positioning, normalization is used to "unpack" these records. By splitting multiallelic sites and left-aligning Indels against the reference, we create a standardized dataset that prevents "no-calls" and ensures every variant correctly matches known clinical definitions in the downstream Snakemake pipeline.
+
+```bash
+# Normalize: Left-align indels and split multiallelic sites
+bcftools norm -m -any -f ../step-3/GRCh38.chr.fa MU_cohort_joint_calls.vcf.gz -Oz -o MU_cohort_norm.vcf.gz
+
+# Index the result (required for most downstream tools)
+bcftools index -t MU_cohort_norm.vcf.gz
+```
+**5.3 Normalized VCF Verification**
+
+With your file now ready, run this one-liner to confirm the sample IDs match your expectations:
+
+```bash
+bcftools query -l MU_cohort_norm.vcf.gz | head -n 5
+```
+
