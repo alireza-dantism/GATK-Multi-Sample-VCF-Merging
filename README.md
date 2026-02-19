@@ -151,7 +151,7 @@ conda activate bcftools_env
 
 **5.2 Run the Normalization**
 
-Normalization is a critical step to ensure that the VCF is compatible with some other tools. These tools require parsimonious, biallelic records to accurately call star alleles and haplotypes. Because standard joint-genotyping outputs often include multiple alternate alleles on a single line (multiallelic sites) and inconsistent Indel positioning, normalization is used to "unpack" these records. By splitting multiallelic sites and left-aligning Indels against the reference, we create a standardized dataset that prevents "no-calls" and ensures every variant correctly matches known clinical definitions in the downstream Snakemake pipeline.
+Normalization is a critical step to ensure that the VCF is compatible with some other tools. These tools require parsimonious, biallelic records to accurately call star alleles and haplotypes. Because standard joint-genotyping outputs often include multiple alternate alleles on a single line (multiallelic sites) and inconsistent Indel positioning, normalization is used to "unpack" these records. By splitting multiallelic sites and left-aligning Indels against the reference, we create a standardized dataset that prevents "no-calls" and ensures every variant correctly matches known clinical definitions in the downstream Snakemake/NextFlow pipeline.
 
 ```bash
 # Normalize: Left-align indels and split multiallelic sites
